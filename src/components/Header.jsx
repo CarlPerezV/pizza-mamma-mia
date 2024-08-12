@@ -3,7 +3,7 @@ const Header = () => {
     <div
       className="text-center "
       style={{
-        backgroundImage: "url(public/Header.jpg)",
+        backgroundImage: "url(./public/Header.jpg)",
         height: "30vh",
         backgroundPosition: "center",
       }}
