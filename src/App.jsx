@@ -1,20 +1,20 @@
 import "./App.css";
 
 import NavbarContainer from "./components/NavbarContainer";
-// import Home from "./components/Home";
-import Footer from "./components/Footer";
+import Home from "./components/Home";
 // import Register from "./components/Register";
 // import Login from "./components/Login";
-import Cart from "./components/Cart";
+// import Cart from "./components/Cart";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <>
       <NavbarContainer />
-      {/* <Home /> */}
+      <Home />
       {/* <Register /> */}
       {/* <Login /> */}
-      <Cart />
+      {/* <Cart /> */}
       <Footer />
     </>
   );
