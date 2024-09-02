@@ -15,12 +15,8 @@ Detalles de esta actualización: Cuando se vuelve a 0 no se elimina el producto 
 Hito 4
 
 En esta ocasión se agrega la información desde una API, la cual se llama desde el componente Home, lo agregue en ese lugar ya que desde ahi se llama al CardPizza, que es el componente que muestra las pizzas.
+Adicionalmente se agrega useEffect.
 
-Este es el código que lo llama(no es la gran cosa 😅)
+Hito 5
 
-    const callPizza = async () => {
-        const url = "http://localhost:5000/api/pizzas";
-        const response = await fetch(url);
-        const data = await response.json();
-        setListPizza(data);
-    };
+En esta parte del código se pasa parte de los componentes a la carpeta pages, ya que en esta version se agrega react-router, se cambia un poco el estilo y en el cart (carrito) se modifica parte del mismo para ver lo que se agrega (se debe mejorar mas el diseño)
