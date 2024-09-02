@@ -1,7 +1,7 @@
 const Header = () => {
   return (
     <div
-      className="text-center "
+      className="text-center"
       style={{
         backgroundImage: "url(./Header.jpg)",
         height: "30vh",
@@ -15,8 +15,8 @@ const Header = () => {
         }}
       >
         <div className="d-flex justify-content-center align-items-center h-100">
-          <div className="text-white ">
-            <h1>¡Pizzeria Mamma Mia!</h1>
+          <div className="text-warning fw-bold shadow-lg">
+            <h1 className="fw-bold ">¡Pizzeria Mamma Mia!</h1>
             <span>¡Tenemos las mejores pizzas que podrás encontrar!</span>
           </div>
         </div>

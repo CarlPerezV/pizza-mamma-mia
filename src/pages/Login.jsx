@@ -3,7 +3,6 @@ import { useState } from "react";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rePass, setRePass] = useState("");
   const [errors, setErrors] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -33,7 +32,7 @@ const Login = () => {
 
     setErrors(false);
 
-    alert("Usuario registrado");
+    alert("Bienvenido");
   };
 
   return (

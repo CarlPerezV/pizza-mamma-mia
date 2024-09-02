@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 
 import { Pizzas } from "../Pizzas";
 
-import CardPizza from "./CardPizza";
+import CartCardPizza from "../components/CartCardPizza";
 
 const Cart = () => {
   const [listPizza] = useState(Pizzas);
@@ -49,40 +49,42 @@ const Cart = () => {
   }, 0);
 
   return (
-    <Container>
+    <Container className="d-flex justify-content-between w-100">
       <Container className="text-center ">
         <div className="row row-cols-3 justify-content-md-center gap-4 my-4">
           {listPizza.map((pizza) => (
-            <CardPizza
+            <CartCardPizza
               id={pizza.id}
               key={pizza.id}
               image={pizza.img}
               name={pizza.name}
               price={pizza.price}
-              ingredients={pizza.ingredients}
               addPizza={() => handleAdd(pizza)}
               delPizza={() => handleDel(pizza)}
             />
           ))}
         </div>
       </Container>
-      <Container className="justify-content-center d-flex ">
-        <ul className="list-group pt-4 m-2 d-flex  ">
+      {/* Contenedor del carrito */}
+      <Container
+        className="d-flex justify-content-center"
+        style={{ width: "35%" }}
+      >
+        <ul className="list-group w-100 pt-4">
           {cart.map((prod) => (
             <li
               key={prod.id}
-              className="list-group-item d-flex justify-content-between align-items-center"
+              className="list-group-item d-flex justify-content-between align-items-start text-warning text-bg-dark text-capitalize"
             >
               {prod.name}
-              <span className="badge text-bg-secondary rounded-pill m-2">
+              <span className="badge text-bg-warning rounded-pill">
                 {prod.quantity}
               </span>
             </li>
           ))}
 
-          <li className="list-group-item d-flex justify-content-between align-items-center">
+          <li className="list-group-item d-flex align-items-center justify-content-center text-warning text-bg-dark">
             Total: ${new Intl.NumberFormat().format(totalPrice)}
-            <span className="badge">{totalPrice}</span>
           </li>
         </ul>
       </Container>

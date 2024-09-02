@@ -1,38 +1,22 @@
-import { Button, Card, ListGroup } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 
-const CardPizza = ({
-  idPizza,
-  image,
-  name,
-  price,
-  ingredients,
-  addPizza,
-  delPizza,
-}) => {
+const CardPizza = ({ idPizza, image, name, price, addPizza, delPizza }) => {
   return (
     <Card
-      className="text-bg-dark border-danger overflow-hidden"
-      style={{ width: "18rem" }}
+      className="text-bg-dark border-danger text-warning overflow-hidden"
+      style={{ width: "14rem" }}
     >
       <Card.Img variant="card-img-bottom" src={image}></Card.Img>
       <Card.Body>
-        <Card.Title className="text-center text-capitalize">
+        <Card.Title className="text-center text-capitalize ">
           Pizza {name}
         </Card.Title>
       </Card.Body>
-      <ListGroup className="text-center list-group-flush py-2">
-        <small>🍕 Ingredientes:</small>
-        <small className="fw-semibold">
-          {ingredients.map((ingredient, i) => (
-            <small key={i}> {ingredient}, </small>
-          ))}
-        </small>
-      </ListGroup>
-      <Card.Body className="text-center">
+      <Card.Body>
         <Card.Title>
           Precio: ${new Intl.NumberFormat().format(price)}
         </Card.Title>
-        <Card.Body className="d-flex justify-content-between px-2">
+        <Card.Body className="d-flex btn-group px-2 justify-content-between">
           <Button
             id={idPizza}
             className="btn-sm"
