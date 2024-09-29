@@ -1,27 +1,31 @@
+import { useContext } from "react";
 import { Button, Card } from "react-bootstrap";
+import { PizzaContext } from "../context/PizzaContext";
 
-const CardPizza = ({ idPizza, image, name, price, addPizza, delPizza }) => {
+const CardPizza = (pizza) => {
+  const { addToCart, delToCart } = useContext(PizzaContext);
+
+  const { idPizza, image, name, price } = pizza;
+
   return (
     <Card
-      className="text-bg-dark border-danger text-warning overflow-hidden"
-      style={{ width: "14rem" }}
+      className="text-bg-dark border-danger text-warning fs-6 m-2 overflow-hidden d-flex flex-row"
+      style={{ height: "8rem", width: "30rem" }}
     >
       <Card.Img variant="card-img-bottom" src={image}></Card.Img>
       <Card.Body>
-        <Card.Title className="text-center text-capitalize ">
+        <Card.Title className="text-center fs-6 text-capitalize ">
           Pizza {name}
         </Card.Title>
-      </Card.Body>
-      <Card.Body>
-        <Card.Title>
+        <Card.Title className="fs-6">
           Precio: ${new Intl.NumberFormat().format(price)}
         </Card.Title>
-        <Card.Body className="d-flex btn-group px-2 justify-content-between">
+        <Card.Body className="d-flex btn-group fs-6 px-2 justify-content-between">
           <Button
             id={idPizza}
             className="btn-sm"
             variant="outline-danger"
-            onClick={delPizza}
+            onClick={() => delToCart(pizza)}
           >
             Quitar ✖
           </Button>
@@ -29,7 +33,7 @@ const CardPizza = ({ idPizza, image, name, price, addPizza, delPizza }) => {
             id={idPizza}
             className="btn-sm"
             variant="outline-warning"
-            onClick={addPizza}
+            onClick={() => addToCart(pizza)}
           >
             Añadir 🛒
           </Button>

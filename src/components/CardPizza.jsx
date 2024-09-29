@@ -1,22 +1,20 @@
+import { useContext } from "react";
 import { Button, Card, ListGroup } from "react-bootstrap";
+import { PizzaContext } from "../context/PizzaContext";
 
-const CardPizza = ({
-  idPizza,
-  image,
-  name,
-  price,
-  ingredients,
-  addPizza,
-  delPizza,
-}) => {
+const CardPizza = (pizza) => {
+  const { addToCart, delToCart } = useContext(PizzaContext);
+
+  const { idPizza, image, name, price, ingredients } = pizza;
+
   return (
     <Card
-      className="text-bg-dark border-danger overflow-hidden"
+      className="text-bg-dark border-danger text-warning overflow-hidden"
       style={{ width: "18rem" }}
     >
       <Card.Img variant="card-img-bottom" src={image}></Card.Img>
       <Card.Body>
-        <Card.Title className="text-center text-capitalize">
+        <Card.Title className="text-center text-success  text-capitalize">
           Pizza {name}
         </Card.Title>
       </Card.Body>
@@ -37,7 +35,7 @@ const CardPizza = ({
             id={idPizza}
             className="btn-sm"
             variant="outline-danger"
-            onClick={delPizza}
+            onClick={() => delToCart(pizza)}
           >
             Quitar ✖
           </Button>
@@ -45,7 +43,7 @@ const CardPizza = ({
             id={idPizza}
             className="btn-sm"
             variant="outline-warning"
-            onClick={addPizza}
+            onClick={() => addToCart(pizza)}
           >
             Añadir 🛒
           </Button>

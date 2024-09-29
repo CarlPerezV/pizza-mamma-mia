@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { PizzaContext } from "../context/PizzaContext";
+
 import { Link } from "react-router-dom";
 
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 
 const NavbarContainer = () => {
+  const { totalPrice } = useContext(PizzaContext);
+
   const [token, setToken] = useState(false);
-  const [total, setTotal] = useState(25000);
 
   // const handleUser = () => {
   //   token ? setToken(false) : setToken(true);
@@ -18,7 +21,7 @@ const NavbarContainer = () => {
         <a className="navbar-brand text-white fw-bold" href="/">
           <img
             className="d-inline-block mx-1 "
-            src="public/pizza.png"
+            src="pizza.png"
             height="22"
             width="28"
             alt="Logo"
@@ -73,7 +76,7 @@ const NavbarContainer = () => {
         className="text-white"
         variant="outline-warning"
       >
-        🛒 Total: ${new Intl.NumberFormat().format(total)}
+        🛒 Total: ${new Intl.NumberFormat().format(totalPrice)}
       </Button>
     </Navbar>
   );

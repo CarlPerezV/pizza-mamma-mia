@@ -4,7 +4,7 @@ const NotFound = () => {
       <div
         className="d-flex justify-content-center align-items-center mt-0"
         style={{
-          backgroundImage: "url(public/error.png)",
+          backgroundImage: "url(src/assets/error.png)",
           margin: "auto",
           width: "50vh",
           height: "45vh",
