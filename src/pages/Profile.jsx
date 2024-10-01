@@ -1,15 +1,5 @@
 const Profile = () => {
   return (
-    // <div>
-    //   <ul>
-    //     Profile
-    //     <li>Contiene nombre</li>
-    //     <li>Contiene CORREO</li>
-    //     <li>Contiene DATOS ADICIONALES</li>
-    //     <button className="btn btn-danger">Cerrar sesion</button>
-    //   </ul>
-    // </div>
-
     <section
       className="container mt-5 bg-success p-5 rounded-circle"
       style={{ width: "20rem" }}

@@ -1,17 +1,28 @@
 import { useContext } from "react";
-import { Alert, Container } from "react-bootstrap";
+import { Alert, Button, Container } from "react-bootstrap";
 import CartPizza from "../components/CartPizza";
 
 import { PizzaContext } from "../context/PizzaContext";
 
 const Cart = () => {
-  const { cart, totalPrice } = useContext(PizzaContext);
+  const { cart, totalPrice, backTo, token } = useContext(PizzaContext);
 
   return (
     <Container className="d-flex justify-content-between w-100">
       {totalPrice == 0 ? (
-        <Alert className="w-100 m-5" key="warning" variant="warning">
-          No hay pizzas agregadas!
+        <Alert
+          className="w-100 m-5 d-flex flex-column text-center"
+          key="warning"
+          variant="warning"
+        >
+          <div>No hay pizzas agregadas!</div>
+          <Button
+            variant="success"
+            className="w-25 m-auto mt-3"
+            onClick={backTo}
+          >
+            Inicio
+          </Button>
         </Alert>
       ) : (
         <Container>
@@ -19,7 +30,7 @@ const Cart = () => {
             <CartPizza
               key={pizza.id}
               id={pizza.id}
-              image={pizza.image}
+              img={pizza.img}
               name={pizza.name}
               price={pizza.price}
             />
@@ -33,8 +44,8 @@ const Cart = () => {
       >
         <ul className="list-group w-100 pt-4">
           {totalPrice == 0 ? (
-            <li className="list-group-item d-flex justify-content-between align-items-start text-warning text-bg-dark text-capitalize">
-              Agrega productos
+            <li className="list-group-item d-flex justify-content-center text-center text-warning text-bg-dark text-capitalize">
+              Sin productos
             </li>
           ) : (
             cart.map((prod) => (
@@ -52,6 +63,14 @@ const Cart = () => {
 
           <li className="list-group-item d-flex align-items-center justify-content-center text-warning text-bg-dark">
             Total: ${new Intl.NumberFormat().format(totalPrice)}
+          </li>
+          <li className="list-group-item d-flex align-items-center justify-content-center text-warning text-bg-dark">
+            <Button
+              className={token ? "enabled" : "disabled "}
+              variant="success"
+            >
+              Pagar
+            </Button>
           </li>
         </ul>
       </Container>

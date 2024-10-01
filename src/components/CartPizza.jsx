@@ -5,14 +5,14 @@ import { PizzaContext } from "../context/PizzaContext";
 const CardPizza = (pizza) => {
   const { addToCart, delToCart } = useContext(PizzaContext);
 
-  const { idPizza, image, name, price } = pizza;
+  const { idPizza, img, name, price } = pizza;
 
   return (
     <Card
       className="text-bg-dark border-danger text-warning fs-6 m-2 overflow-hidden d-flex flex-row"
       style={{ height: "8rem", width: "30rem" }}
     >
-      <Card.Img variant="card-img-bottom" src={image}></Card.Img>
+      <Card.Img variant="card-img-bottom" src={img}></Card.Img>
       <Card.Body>
         <Card.Title className="text-center fs-6 text-capitalize ">
           Pizza {name}

@@ -17,7 +17,7 @@ const Home = () => {
           <CardPizza
             key={pizza.id}
             id={pizza.id}
-            image={pizza.img}
+            img={pizza.img}
             name={pizza.name}
             price={pizza.price}
             ingredients={pizza.ingredients}

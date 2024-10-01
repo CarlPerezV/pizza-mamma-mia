@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { PizzaContext } from "../context/PizzaContext";
 
 import { Link } from "react-router-dom";
@@ -7,13 +7,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 
 const NavbarContainer = () => {
-  const { totalPrice } = useContext(PizzaContext);
-
-  const [token, setToken] = useState(false);
-
-  // const handleUser = () => {
-  //   token ? setToken(false) : setToken(true);
-  // };
+  const { totalPrice, token, logInLogOut } = useContext(PizzaContext);
 
   return (
     <Navbar className="justify-content-between px-3" bg="dark">
@@ -52,22 +46,23 @@ const NavbarContainer = () => {
           </>
         ) : (
           <>
-            <Button className="mx-2" variant="outline-danger">
+            <Button
+              to="/profile"
+              as={Link}
+              className="mx-2"
+              variant="outline-danger"
+            >
               🔓 Profile
             </Button>
-            <Button className="mx-2" variant="outline-danger">
+            <Button
+              className="mx-2"
+              variant="outline-danger"
+              onClick={logInLogOut}
+            >
               🔓 Logout
             </Button>
           </>
         )}
-        <Button
-          to="/profile"
-          as={Link}
-          className="mx-2"
-          variant="outline-danger"
-        >
-          🔓 Profile
-        </Button>
       </div>
 
       <Button
