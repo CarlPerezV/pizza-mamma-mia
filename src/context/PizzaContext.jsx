@@ -6,13 +6,24 @@ export const PizzaContext = createContext();
 export const PizzaProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [listPizza, setListPizza] = useState([]);
-
-  const [token, setToken] = useState(true);
+  const [user, setUser] = useState(null);
 
   const goTo = useNavigate();
 
   useEffect(() => {
     callPizza();
+
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      fetch("http://localhost:5000/api/auth/me", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => setUser(data));
+    }
   }, []);
 
   const callPizza = async () => {
@@ -20,6 +31,81 @@ export const PizzaProvider = ({ children }) => {
     const response = await fetch(url);
     const data = await response.json();
     setListPizza(data);
+  };
+
+  const signIn = async (email, password) => {
+    const resp = await fetch("http://localhost:5000/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+
+    const data = await resp.json();
+    alert(data?.error || "Authentication successful!");
+    localStorage.setItem("token", data.token);
+
+    goTo("/");
+  };
+
+  const register = async (email, password) => {
+    const resp = await fetch("http://localhost:5000/api/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+
+    const data = await resp.json();
+    alert(data?.error || "Authentication successful!");
+    localStorage.setItem("token", data.token);
+  };
+
+  // toma los datos del usuario
+  const getUserInfo = async () => {
+    const resp = await fetch("http://localhost:5000/api/auth/register", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
+      },
+    });
+
+    const data = await resp.json();
+    localStorage.setItem("token", data.token);
+  };
+
+  const buyPizza = async () => {
+    const resp = await fetch("http://localhost:5000/api/checkouts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
+      },
+      body: JSON.stringify({
+        cart: cart,
+      }),
+    });
+
+    if (resp.status == 200) {
+      alert("Compra exitosa!");
+    } else {
+      alert("Hubo un problema con la compra!!");
+    }
+    console.log(user.token);
+  };
+
+  const signOut = () => {
+    setUser(null);
+    goTo("/");
   };
 
   const addToCart = (pizza) => {
@@ -80,10 +166,6 @@ export const PizzaProvider = ({ children }) => {
   };
 
   //cambia el estado del login
-  const logInLogOut = () => {
-    console.log(token);
-    setToken((prevState) => !prevState);
-  };
 
   const PizzasProviderValues = {
     cart,
@@ -95,8 +177,12 @@ export const PizzaProvider = ({ children }) => {
     totalPrice,
     details,
     backTo,
-    token,
-    logInLogOut,
+    user,
+    getUserInfo,
+    buyPizza,
+    signIn,
+    register,
+    signOut,
   };
 
   return (

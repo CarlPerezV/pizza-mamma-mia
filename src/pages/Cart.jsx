@@ -5,7 +5,7 @@ import CartPizza from "../components/CartPizza";
 import { PizzaContext } from "../context/PizzaContext";
 
 const Cart = () => {
-  const { cart, totalPrice, backTo, token } = useContext(PizzaContext);
+  const { cart, totalPrice, backTo, user, buyPizza } = useContext(PizzaContext);
 
   return (
     <Container className="d-flex justify-content-between w-100">
@@ -66,8 +66,9 @@ const Cart = () => {
           </li>
           <li className="list-group-item d-flex align-items-center justify-content-center text-warning text-bg-dark">
             <Button
-              className={token ? "enabled" : "disabled "}
+              className={user ? "enabled" : "disabled "}
               variant="success"
+              onClick={buyPizza}
             >
               Pagar
             </Button>

@@ -7,7 +7,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 
 const NavbarContainer = () => {
-  const { totalPrice, token, logInLogOut } = useContext(PizzaContext);
+  const { totalPrice, user, signOut } = useContext(PizzaContext);
 
   return (
     <Navbar className="justify-content-between px-3" bg="dark">
@@ -25,7 +25,7 @@ const NavbarContainer = () => {
         <Button to="/" as={Link} className="mx-2 " variant="outline-danger">
           🍕 Home
         </Button>
-        {!token ? (
+        {!user ? (
           <>
             <Button
               to="/login"
@@ -54,11 +54,7 @@ const NavbarContainer = () => {
             >
               🔓 Profile
             </Button>
-            <Button
-              className="mx-2"
-              variant="outline-danger"
-              onClick={logInLogOut}
-            >
+            <Button className="mx-2" variant="outline-danger" onClick={signOut}>
               🔓 Logout
             </Button>
           </>

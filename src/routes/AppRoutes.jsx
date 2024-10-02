@@ -12,18 +12,21 @@ import Profile from "../pages/Profile";
 import NotFound from "../pages/NotFound";
 
 const AppRoutes = () => {
-  const { token } = useContext(PizzaContext);
+  const { user } = useContext(PizzaContext);
 
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
+      <Route
+        path="/register"
+        element={user ? <Navigate to="/" /> : <Register />}
+      />
+      <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
       <Route path="/pizza/:id" element={<Pizza />} />
       <Route path="/cart" element={<Cart />} />
       <Route
         path="/profile"
-        element={token ? <Profile /> : <Navigate to={"<Login />"} />}
+        element={user ? <Profile /> : <Navigate to="/login" />}
       />
       <Route path="*" element={<NotFound />} />
     </Routes>

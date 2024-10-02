@@ -30,3 +30,11 @@ Hito 7
 
 En esta entrega se utiliza useParams para acceder a los datos de las pizzas de manera dinámica, también se acomoda parte de App.js para que quede mas limpio, se pasan los datos de las rutas a la carpeta routes, se crea un token básico para que se muestren datos solamente si esta logueado o no, por ahora el token es solo un booleano. También tiene limitaciones al momento de pagar, si esta logueado el botón de pagar esta activo, en caso contrario no.
 Adicional, el problema del hito 6 en el que al momento de dejar la lista en 0 y seguía apareciendo fue corregido, se acomoda a un nuevo array que al momento de estar en 0 lo saca de la lista.
+
+Hito 8
+
+En esta entrega, se implementa login y register desde un back-end, consumiendo las rutas que dieron en el desafio, se hace un login, register y logout mediante un token.
+Se muestran los datos como pide el desafio, lamentablemente no pude simular la compra, me daba un error con la api.
+Puntos a mejorar:
+
+1. ordernar el context, pensaba en hacer un context por usuario y otro por compra, asi no lleno tanto ese pobre context.

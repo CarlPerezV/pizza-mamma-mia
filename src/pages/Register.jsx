@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { PizzaContext } from "../context/PizzaContext";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -6,6 +7,8 @@ const Register = () => {
   const [rePass, setRePass] = useState("");
   const [errors, setErrors] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const { register, user, goTo } = useContext(PizzaContext);
 
   const validateData = (e) => {
     e.preventDefault();
@@ -39,60 +42,66 @@ const Register = () => {
 
     setErrors(false);
 
-    alert("Usuario registrado");
+    register(email, password);
   };
 
   return (
-    <div className="container-lg mt-5" style={{ width: "22rem" }}>
-      <p className="fs-1 text-center fw-bold text-uppercase">Register</p>
-      <form onSubmit={validateData}>
-        {errors && (
-          <div className="alert alert-danger" role="alert">
-            {errorMessage}
-          </div>
-        )}
+    <>
+      {user ? (
+        goTo("/")
+      ) : (
+        <div className="container-lg mt-5" style={{ width: "22rem" }}>
+          <p className="fs-1 text-center fw-bold text-uppercase">Register</p>
+          <form onSubmit={validateData}>
+            {errors && (
+              <div className="alert alert-danger" role="alert">
+                {errorMessage}
+              </div>
+            )}
 
-        <div className="mb-2">
-          <label className="form-label">Email</label>
-          <input
-            type="email"
-            name="email"
-            className="form-control"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            placeholder="Ingrese correo"
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Password</label>
-          <input
-            type="password"
-            name="password"
-            className="form-control"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            placeholder="Ingrese contraseña"
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Confirme Password</label>
-          <input
-            type="password"
-            name="rePassword"
-            className="form-control"
-            onChange={(e) => setRePass(e.target.value)}
-            value={rePass}
-            placeholder="Confirme contraseña"
-          />
-        </div>
+            <div className="mb-2">
+              <label className="form-label">Email</label>
+              <input
+                type="email"
+                name="email"
+                className="form-control"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                placeholder="Ingrese correo"
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Password</label>
+              <input
+                type="password"
+                name="password"
+                className="form-control"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                placeholder="Ingrese contraseña"
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Confirme Password</label>
+              <input
+                type="password"
+                name="rePassword"
+                className="form-control"
+                onChange={(e) => setRePass(e.target.value)}
+                value={rePass}
+                placeholder="Confirme contraseña"
+              />
+            </div>
 
-        <div className="text-center">
-          <button type="submit" className="btn btn-dark">
-            Registrar
-          </button>
+            <div className="text-center">
+              <button type="submit" className="btn btn-dark">
+                Registrar
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
+      )}
+    </>
   );
 };
 

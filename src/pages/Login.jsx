@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { PizzaContext } from "../context/PizzaContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -6,11 +7,10 @@ const Login = () => {
   const [errors, setErrors] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const validateData = (e) => {
-    e.preventDefault();
+  const { signIn, user, goTo } = useContext(PizzaContext);
 
+  const validateData = async () => {
     //Esta parte del código la deje separada, ya que después prefiero incorporar una librería para tener mejor control de el formulario
-
     if (!email.trim()) {
       setErrors(true);
       setErrorMessage("Ingrese Correo");
@@ -32,49 +32,59 @@ const Login = () => {
 
     setErrors(false);
 
-    alert("Bienvenido");
+    try {
+      await signIn(email, password);
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (
-    <div className="container-lg mt-5" style={{ width: "22rem" }}>
-      <p className="fs-1 text-center fw-bold text-uppercase">Login</p>
-      <form onSubmit={validateData}>
-        {errors && (
-          <div className="alert alert-danger" role="alert">
-            {errorMessage}
-          </div>
-        )}
+    <>
+      {user ? (
+        goTo("/profile")
+      ) : (
+        <div className="container-lg mt-5" style={{ width: "22rem" }}>
+          <p className="fs-1 text-center fw-bold text-uppercase">Login</p>
+          <form onSubmit={validateData}>
+            {errors && (
+              <div className="alert alert-danger" role="alert">
+                {errorMessage}
+              </div>
+            )}
 
-        <div className="mb-2">
-          <label className="form-label">Email</label>
-          <input
-            type="email"
-            name="email"
-            className="form-control"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            placeholder="Ingrese correo"
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Password</label>
-          <input
-            type="password"
-            name="password"
-            className="form-control"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            placeholder="Ingrese contraseña"
-          />
-        </div>
+            <div className="mb-2">
+              <label className="form-label">Email</label>
+              <input
+                type="email"
+                name="email"
+                className="form-control"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                placeholder="Ingrese correo"
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Password</label>
+              <input
+                type="password"
+                name="password"
+                className="form-control"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                placeholder="Ingrese contraseña"
+              />
+            </div>
 
-        <div className="text-center">
-          <button type="submit" className="btn btn-dark">
-            Ingresa
-          </button>
+            <div className="text-center">
+              <button type="submit" className="btn btn-dark">
+                Ingresa
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
+      )}
+    </>
   );
 };
 
